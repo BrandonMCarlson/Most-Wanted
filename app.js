@@ -12,7 +12,10 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchByEyeColor(people);   
+      searchResults = searchByGender(people);
+      searchResults = searchByOccupation(people); 
+// TODO: search by traits
       break;
       default:
     app(people); // restart app
@@ -34,6 +37,10 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+
+
+  // possibly use a .filter() function here to ensure the proper names are selected upon a users input
+
 
   switch(displayOption){
     case "info":
@@ -71,6 +78,36 @@ function searchByName(people){
   return foundPerson;
 }
 
+function searchByGender(people){
+  let searchGender = promptFor("What is the persons gender?" , chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.Gender === searchGender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson;
+}
+
+function searchByEyeColor(people){
+  let searchEyeColor = promptFor("What are the person eye colors?" , chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.eyeColor === searchEyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson; 
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -100,7 +137,12 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
+function maleFemale(input){
+  return input.toLowerCase() == "male" || input.toLowerCase() == "female";
+}
+
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
 }
+
