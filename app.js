@@ -12,10 +12,8 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults = searchByEyeColor(people);   
       searchResults = searchByGender(people);
-      searchResults = searchByOccupation(people); 
-// TODO: search by traits
+      searchResults = searchByEyeColor(people);
       break;
       default:
     app(people); // restart app
@@ -62,12 +60,11 @@ function mainMenu(person, people){
   }
 }
 
-function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+function searchByGender(people){
+  let searchGender = promptFor("What is the person's gender?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.gender === searchGender){
       return true;
     }
     else{
@@ -78,11 +75,13 @@ function searchByName(people){
   return foundPerson;
 }
 
-function searchByGender(people){
-  let searchGender = promptFor("What is the persons gender?" , chars);
+
+function searchByName(people){
+  let firstName = promptFor("What is the person's first name?", chars);
+  let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.Gender === searchGender){
+    if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
     else{
