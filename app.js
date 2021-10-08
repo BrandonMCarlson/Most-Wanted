@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchByGender(people);
       break;
       default:
     app(people); // restart app
@@ -54,6 +54,22 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+
+function searchByGender(people){
+  let searchGender = promptFor("What is the person's gender?", chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.gender === searchGender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson;
+}
+
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
