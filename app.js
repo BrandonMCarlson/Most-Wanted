@@ -12,7 +12,12 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+<<<<<<< HEAD
       searchResults = searchByTrait(people);
+=======
+      searchResults = searchByGender(people);
+      searchResults = searchByEyeColor(people);
+>>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
       break;
       default:
     app(people); // restart app
@@ -34,7 +39,15 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+<<<<<<< HEAD
   
+=======
+
+
+  // possibly use a .filter() function here to ensure the proper names are selected upon a users input
+
+
+>>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
   switch(displayOption){
     case "info":
     // TODO: get person's info
@@ -102,6 +115,21 @@ function searchByName(people){
   return foundPerson;
 }
 
+function searchByEyeColor(people){
+  let searchEyeColor = promptFor("What are the person eye colors?" , chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.eyeColor === searchEyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson; 
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -132,10 +160,15 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
+function maleFemale(input){
+  return input.toLowerCase() == "male" || input.toLowerCase() == "female";
+}
+
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
 }
+<<<<<<< HEAD
 let traitSearch;
 function searchByTrait(people){
   traitSearch = promptFor("Which trait would you like to search for? 'dob', gender', 'height', 'weight', 'eye color', 'occupation'", chars);
@@ -159,3 +192,6 @@ function searchByTrait(people){
     return occupationPrompt;
   }
 }
+=======
+
+>>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
