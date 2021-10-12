@@ -12,12 +12,10 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-<<<<<<< HEAD
       searchResults = searchByTrait(people);
-=======
-      searchResults = searchByGender(people);
-      searchResults = searchByEyeColor(people);
->>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
+      let chosenTraits = stringOfInfo(searchResult)
+      alert(stringOfInfo)
+      // searchResults = searchByHeight(people);
       break;
       default:
     app(people); // restart app
@@ -39,17 +37,15 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-<<<<<<< HEAD
-  
-=======
+
 
 
   // possibly use a .filter() function here to ensure the proper names are selected upon a users input
 
 
->>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
   switch(displayOption){
-    case "info":
+    case "info": 
+     
     // TODO: get person's info
     break;
     case "family":
@@ -68,37 +64,6 @@ function mainMenu(person, people){
   }
 }
 
-
-// function searchByEyeColor(people){
-//   let searchEyeColor = promptFor("What is the person's eye color?" , chars);
-//   let foundPerson = people.filter(function(person){
-//     if(person.eyeColor === searchEyeColor){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person using the name they entered
-//   return foundPerson;
-// }
-
-// function searchByGender(people){
-//   let searchGender = promptFor("What is the person's gender?", chars);
-
-//   let foundPerson = people.filter(function(person){
-//     if(person.gender === searchGender){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person using the name they entered
-//   return foundPerson;
-// }
-
-
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -112,23 +77,54 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson;
+  return foundPerson;  
 }
 
-function searchByEyeColor(people){
-  let searchEyeColor = promptFor("What are the person eye colors?" , chars);
+function searchByGender(people) {
+  let gender = promptFor("What is the person's gender?", chars);
 
-  let foundPerson = people.filter(function(person){
-    if(person.eyeColor === searchEyeColor){
+  let foundGender = people.filter(function (person) {
+    if (person.gender === gender && person.gender === gender) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson; 
+  return foundGender;
 }
+
+function searchByWeight(people) {
+  let weight = promptFor("What is the person's weight?", chars);
+
+  let foundWeight = people.filter(function (person) {
+    if (person.weight === weight) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundWeight;
+}
+
+// function searchByHeight(people) {
+//   let height = promptFor("What is the person's height (total inches please)?", chars);
+
+//   let foundHeight = people.filter(function (person) {
+//     if (person.height === height) {
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   // TODO: find the person using the name they entered
+//   return foundHeight;
+// }
+ 
 
 // alerts a list of people
 function displayPeople(people){
@@ -137,14 +133,12 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(person, people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-
-  
+  let personInfo = "First Name: " + person.firstName + "\n" + "Last Name: " + person.lastName + "\n" + "Gender: " + person.gender + "\n" + "dob: " + person.dob + "\n" + "Height: " + person.height + "\n" + "Weight: " + person.weight + "\n" +"eyeColor: " + person.eyeColor + "\n" + "Occupation: " + person.occupation + "\n" + "Parents: " + person.parents + "\n" + "currentSpouse: " + person.currentSpouse;            
   // TODO: finish getting the rest of the information to display
-  alert(personInfo);
+  alert(personInfo); 
 }
 
 // function that prompts and validates user input
@@ -168,30 +162,39 @@ function maleFemale(input){
 function chars(input){
   return true; // default validation only
 }
-<<<<<<< HEAD
+
+function stringOfInfo(array){
+  let foundPeopleString = "";
+  for (let i = 0; i < array.length; i++) {
+    foundPeopleString += (array[i].firstName, " ", array[i].lastName) + "\n";
+    
+  }
+  return foundPeopleString;
+}
+
+
 let traitSearch;
 function searchByTrait(people){
   traitSearch = promptFor("Which trait would you like to search for? 'dob', gender', 'height', 'weight', 'eye color', 'occupation'", chars);
   if(traitSearch === "gender"){
-    genderPrompt = promptFor("Is the person male or female?");
-    return genderPrompt;
+    genderPrompt = promptFor("Is the person male or female?", chars);
+    return searchByGender;
   }else if(traitSearch === "dob"){
-    dobPrompt = promptFor("What is the person's dob?");
+    dobPrompt = promptFor("What is the person's dob?", chars);
     return dobPrompt;
   }else if(traitSearch === "height"){
-    heightPrompt = promptFor("How tall is the person?");
+    heightPrompt = promptFor("How tall is the person?", chars);
     return heightPrompt;
   }else if(traitSearch === "weight"){
-    weightPrompt = promptFor("What is the person's weight?");
+    weightPrompt = promptFor("What is the person's weight?", chars);
     return weightPrompt;
   }else if(traitSearch === "eye color"){
-    eyeColorPrompt = promptFor("What color are the person's eyes?");
+    eyeColorPrompt = promptFor("What color are the person's eyes?", chars);
     return eyeColorPrompt;
   }else if(traitSearch === "occupation"){
-    occupationPrompt = promptFor("What is the person's occupation?");
+    occupationPrompt = promptFor("What is the person's occupation?", chars);
     return occupationPrompt;
   }
 }
-=======
 
->>>>>>> db0a5594c1acb13b48af766dd0458a58fc6001fa
+
