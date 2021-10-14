@@ -58,6 +58,11 @@ function mainMenu(person, people) {
         return (spouse.id === person[0].currentSpouse)
       }
     });
+      let spouseChecker;
+      if(partner.length === 0){
+        spouseChecker = "This person has no parents"
+      }
+
       let parents = people.filter(function(possibleParent){
         for (let i = 0; i < people.length; i++) {
           return (possibleParent.id === person[0].parents[i])
@@ -74,6 +79,8 @@ function mainMenu(person, people) {
       else if(parents.length === 2){
         parentChecker = parents[0].firstName + " " + parents[1].firstName;
       }
+      
+      
       let siblings = people.filter(function(possibleSibling){
         for (let i = 0; i < people.length; i++) {
           return (possibleSibling.id === person[0].parents)
@@ -96,6 +103,8 @@ function mainMenu(person, people) {
       break;
       
     case "descendants":
+
+
     // TODO find descendants
          
       break;
