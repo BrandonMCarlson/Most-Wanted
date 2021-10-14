@@ -44,7 +44,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      alert("Gender: " + person[0].gender + "\n" +
+     alert("Gender: " + person[0].gender + "\n" +
       "DOB: " + person[0].dob + "\n" +
       "Height: " + person[0].height + "\n" +
       "Weight: " + person[0].weight + "\n" +
@@ -53,24 +53,51 @@ function mainMenu(person, people) {
       // TODO: get person's info
       break;
     case "family":
-      let familia =  people.filter(function(spouse){
+      let partner =  people.filter(function(spouse){
         for (let i = 0; i < person.length; i++) {
-        if (person[0].currentSpouse === person[i].id){
-        return familia;
+        return (spouse.id === person[0].currentSpouse)
       }
-    }
-  });
+    });
+      let parents = people.filter(function(possibleParent){
+        for (let i = 0; i < people.length; i++) {
+          return (possibleParent.id === person[0].parents[i])
+         
+        }  
+      });
+      let parentChecker;
+      if(parents.length === 0){
+       parentChecker = "This person has no parents"
+      }
+      else if(parents.length === 1){
+        parentChecker = parents[0].firstName 
+      }
+      else if(parents.length === 2){
+        parentChecker = parents[0].firstName + " " + parents[1].firstName
+      }
+      let siblings = people.filter(function(possibleSibling){
+        for (let i = 0; i < person.length; i++) {
+          return (possibleSibling.id === person[0].parents)
+         
+        }  
+      });
+      let siblingChecker;
+       if(siblings.length === 0){
+        siblingChecker = "This person has no siblings"
+      }
+      else if(siblings.length > 0){
+        siblingChecker = person[0].firstName
+      }
   // alert("Parents: " + person[0].parents);
-  alert("Spouse: " + familia[0].firstName + " " + familia[0].lastName + "Parents: " + person[0].parents);
-          
-
-      
-    
+  alert("Spouse: " + partner[0].firstName + " " + partner[0].lastName +"\n" + 
+        "Parents: " + parentChecker + "\n" + 
+        "Siblings: " + siblingChecker);
 
       // TODO: get person's family
       break;
+      
     case "descendants":
-      // TODO: get person's descendants
+      
+         
       break;
     case "restart":
       app(people); // restart
@@ -83,8 +110,8 @@ function mainMenu(person, people) {
 }
 
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  let firstName = promptFor("What is the person's first name? 'please capatalize first letter of first name.'", chars);
+  let lastName = promptFor("What is the person's last name? 'please capatalize the first letter of the last name.'", chars);
 
   let foundPerson = people.filter(function (person) {
     if (person.firstName === firstName && person.lastName === lastName) {
@@ -114,7 +141,7 @@ function searchByGender(people) {
 function searchByWeight(people) {
   let weight = promptFor("What is the person's weight?", chars);
   let foundWeight = people.filter(function (person) {
-    return (person.weight === weight);
+    return (person.weight == weight);
 
   })
   return foundWeight;
@@ -123,7 +150,7 @@ function searchByWeight(people) {
 function searchByHeight(people) {
   let height = promptFor("What is the person's height?", chars);
   let foundHeight = people.filter(function (person) {
-    return (person.height === height);
+    return (person.height == height);
 
   })
   return foundHeight;
@@ -155,7 +182,6 @@ function searchByOccupation(people) {
   })
   return foundOccupation;
 }
-
 
 
 // alerts a list of people
