@@ -54,7 +54,7 @@ function mainMenu(person, people) {
       break;
     case "family":
       let partner =  people.filter(function(spouse){
-        for (let i = 0; i < person.length; i++) {
+        for (let i = 0; i < people.length; i++) {
         return (spouse.id === person[0].currentSpouse)
       }
     });
@@ -69,13 +69,13 @@ function mainMenu(person, people) {
        parentChecker = "This person has no parents"
       }
       else if(parents.length === 1){
-        parentChecker = parents[0].firstName 
+        parentChecker = parents[0].firstName; 
       }
       else if(parents.length === 2){
-        parentChecker = parents[0].firstName + " " + parents[1].firstName
+        parentChecker = parents[0].firstName + " " + parents[1].firstName;
       }
       let siblings = people.filter(function(possibleSibling){
-        for (let i = 0; i < person.length; i++) {
+        for (let i = 0; i < people.length; i++) {
           return (possibleSibling.id === person[0].parents)
          
         }  
@@ -96,7 +96,7 @@ function mainMenu(person, people) {
       break;
       
     case "descendants":
-      
+    // TODO find descendants
          
       break;
     case "restart":
@@ -229,9 +229,20 @@ function stringOfInfo(array) {
   }
   return foundPeopleString;
 }
-
-
-
+let foundDescendants = recursiveDescendants(person[0],people);
+function recursiveDescendants(people, person){
+  let descendantCheckArray = people.filter(function(item){
+    return (item.parents[0] == person.id || item.parents[1] == person.id);
+  })
+  for(let i = 0; i < descendantCheckArray.length; i++){
+descendantCheckArray = recursiveDescendants(people, descendantCheckArray[i])
+if(descendantCheckArray.length === 0){
+  alert("No Descendants");
+}
+  }
+  return  recursiveDescendants(descendantCheckArray);
+}
+alert(descendantCheckArray);
 
 function searchByTrait(people){
   let traitSearch; 
